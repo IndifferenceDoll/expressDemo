@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>nodeDemo</title>
+    <script src="node_modules/axios/dist/axios.js"></script>
+    <script src="node_modules/axios/dist/axios.js"></script>
+</head>
+<body>
+    <form style="text-align: center;">
+        <div>
+            <label for="username" style="display:inline-block;width:80px;">用户名：</label>
+            <input type="text" id="username" />
+        </div>
+        <div>
+            <label for="password" style="display:inline-block;width:80px;">密码：</label>
+            <input type="password" id="password" />
+        </div>
+        <div>
+            <button onclick="login(event)">登录</button>
+            <button onclick="register(event)">注册</button>
+        </div>
+    </form>
+    <script>
+        const instance = axios.create()
+        function login(e){
+            e.preventDefault()
+            let params = {
+                username : document.querySelector('#username').value,
+                password : document.querySelector('#password').value
+            }
+            instance.post('/login',params).then(res=>{
+                let data = res.data
+                console.log(data)
+                if(data.code === 1){
+                    // location.href = '/welcome'
+                }
+            })
+        }
+        function register(e){
+            e.preventDefault()
+            let params = {
+                username : document.querySelector('#username').value,
+                password : document.querySelector('#password').value
+            }
+            instance.post('/register',params)
+        }
+    </script>
+</body>
+</html>
